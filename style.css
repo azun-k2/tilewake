@@ -1,0 +1,57 @@
+/* Tilewake site: one small stylesheet, light and dark. */
+:root {
+  --bg: #fff4ea;
+  --card: #ffffff;
+  --ink: #2e2852;
+  --muted: #625a80;
+  --accent: #c23a1f;
+  --line: #eadff2;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17142a;
+    --card: #241f3d;
+    --ink: #f6f1ff;
+    --muted: #bdb3dc;
+    --accent: #ff8a6b;
+    --line: #3a3359;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 48px 20px 80px;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+main { max-width: 720px; margin: 0 auto; }
+.hero { text-align: center; margin-bottom: 40px; }
+.icon {
+  width: 112px; height: 112px; margin: 0 auto 14px; display: block;
+  filter: drop-shadow(0 10px 22px rgba(238, 91, 59, 0.28));
+}
+h1 { font-size: 34px; margin: 0 0 6px; letter-spacing: -0.4px; }
+.tagline { color: var(--muted); margin: 0; font-size: 18px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px 26px;
+  margin-bottom: 18px;
+}
+h2 { font-size: 20px; margin: 0 0 12px; }
+h3 { font-size: 16px; margin: 22px 0 6px; }
+p, li { color: var(--ink); }
+p.note, li.note { color: var(--muted); }
+ul { padding-left: 22px; }
+li { margin: 5px 0; }
+a { color: var(--accent); }
+nav.links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+nav.links a {
+  text-decoration: none; font-weight: 500;
+  border: 1px solid var(--line); background: var(--card);
+  padding: 9px 16px; border-radius: 999px;
+}
+footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 34px; }
+footer a { color: var(--muted); }

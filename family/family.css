@@ -1,0 +1,133 @@
+/* The family's shared pieces: store badges and the "More apps" grid.
+   Written into every site as family/family.css by _tools/site-family.py;
+   edit it there, not in a site. It uses each site's own colours
+   (--card, --line, --muted, --accent, and --ink or --text) so it follows
+   the site's light and dark themes. */
+
+/* "More apps" links glide to the section rather than jump. */
+html { scroll-behavior: smooth; }
+
+/* Store badges, the official artwork at Apple's and Google's sizes:
+   one height for all, a quarter of it as clear space between them. */
+.family-stores {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start;
+  gap: 12px 14px; margin: 22px 0 6px;
+}
+.family-stores.start { justify-content: flex-start; margin-top: -8px; margin-bottom: 22px; }
+.family-store { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; }
+.family-store img { display: block; height: 46px; width: auto; }
+a.family-store img { transition: transform .15s ease, filter .15s ease; }
+a.family-store:hover img { transform: translateY(-1px); filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .22)); }
+a.family-store:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 10px; }
+.family-store.soon img { opacity: .4; filter: grayscale(1); }
+.family-soon { font-size: 13px; line-height: 1; color: var(--muted); }
+
+/* More apps: one card per sibling, tinted by that app's own colour (--app). */
+.family {
+  /* Wider than the page's text column, so four cards fit a row. */
+  margin: 48px calc(50% - min(520px, 50vw - 16px)) 6px;
+  scroll-margin-top: 24px;
+}
+.family h2 { text-align: center; font-size: 22px; margin: 0 0 6px; letter-spacing: -0.2px; }
+.family-sub { text-align: center; color: var(--muted); margin: 0 auto 20px; max-width: 34em; font-size: 15px; }
+/* Flex rather than grid, so a part-filled last row sits centred. */
+.family-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+}
+.family-grid li { margin: 0; flex: 0 0 calc((100% - 36px) / 4); }
+@media (max-width: 1000px) { .family-grid li { flex-basis: calc((100% - 24px) / 3); } }
+@media (max-width: 740px)  { .family-grid li { flex-basis: calc((100% - 12px) / 2); } }
+.family-app {
+  display: flex; gap: 12px; align-items: flex-start; height: 100%;
+  padding: 14px 14px 13px; border-radius: 16px;
+  background: var(--card); border: 1px solid var(--line);
+  color: inherit; text-decoration: none;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.family-app:hover, .family-app:focus-visible {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--app) 55%, var(--line));
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--app) 20%, transparent);
+  outline: none;
+}
+.family-app img {
+  width: 50px; height: 50px; flex: none; margin-top: 1px;
+  filter: drop-shadow(0 4px 9px color-mix(in srgb, var(--app) 28%, transparent));
+}
+.family-app img.round { border-radius: 22.5%; transform: scale(.84); }  /* iOS-only icons come square and full-bleed */
+.family-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.family-name { font-weight: 650; font-size: 16px; line-height: 1.3; color: var(--ink, var(--text, inherit)); }
+.family-tag { font-size: 14px; line-height: 1.4; color: var(--muted); }
+.family-platforms { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
+.family-platforms span {
+  font-size: 13px; line-height: 1.5; font-weight: 550; white-space: nowrap;
+  padding: 0 8px; border-radius: 999px;
+  background: color-mix(in srgb, var(--app) 11%, transparent);
+  color: color-mix(in srgb, var(--app) 62%, var(--ink, var(--text, #222)));
+}
+.family-more { text-align: center; font-size: 14px; color: var(--muted); margin: 16px 0 0; }
+
+@media (max-width: 500px) {
+  .family-grid { gap: 8px; }
+  .family-grid li { flex-basis: 100%; }
+  .family-app { padding: 12px; }
+  .family-app img { width: 44px; height: 44px; }
+  .family-store img { height: 42px; }
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .family-platforms span {
+    background: color-mix(in srgb, var(--app) 22%, transparent);
+    color: color-mix(in srgb, var(--app) 35%, #ffffff);
+  }
+}
+:root[data-theme="dark"] .family-platforms span {
+  background: color-mix(in srgb, var(--app) 22%, transparent);
+  color: color-mix(in srgb, var(--app) 35%, #ffffff);
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .family-app, a.family-store img { transition: none; }
+  .family-app:hover, .family-app:focus-visible, a.family-store:hover img { transform: none; }
+}
+
+/* Language menu: the last item in the page's menu, a list of every
+   language this page exists in, each in its own name. */
+.family-lang { position: relative; display: inline-block; }
+.family-lang summary {
+  list-style: none; cursor: pointer; user-select: none;
+  display: inline-flex; align-items: center; gap: 7px;
+  font-weight: 500; color: var(--accent);
+  border: 1px solid var(--line); background: var(--card);
+  padding: 8px 15px; border-radius: 999px;
+}
+.family-lang summary::-webkit-details-marker { display: none; }
+.family-lang summary::after {
+  content: ""; width: 7px; height: 7px; margin-inline-start: 2px; margin-top: -3px;
+  border-right: 1.8px solid currentColor; border-bottom: 1.8px solid currentColor; transform: rotate(45deg);
+}
+.family-lang[open] summary::after { transform: rotate(225deg); margin-top: 3px; }
+.family-lang summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.family-lang ul {
+  position: absolute; z-index: 20; top: calc(100% + 8px); inset-inline-end: 0;
+  width: min(520px, calc(100vw - 32px)); max-height: min(440px, 70vh); overflow-y: auto;
+  margin: 0; padding: 8px; list-style: none;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .18);
+  text-align: start;
+}
+.family-lang li { margin: 0; }
+.family-lang ul a {
+  display: block; padding: 7px 10px; border-radius: 8px; border: 0; background: none;
+  font-size: 15px; font-weight: 450; line-height: 1.35; text-decoration: none;
+  color: var(--ink, var(--text, inherit));
+}
+.family-lang ul a:hover, .family-lang ul a:focus-visible { background: color-mix(in srgb, var(--accent) 12%, transparent); outline: none; }
+.family-lang ul a[aria-current] { font-weight: 650; color: var(--accent); }
+@media (max-width: 500px) {
+  .family-lang { position: static; }
+  .family-lang ul { inset-inline: 16px; width: auto; top: auto; margin-top: 8px; }
+  nav.links { position: relative; }
+}
+@media (max-width: 560px) { .family-lang ul { grid-template-columns: repeat(2, 1fr); } }
