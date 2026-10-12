@@ -56,6 +56,7 @@ a.family-store:focus-visible { outline: 2px solid var(--accent); outline-offset:
   filter: drop-shadow(0 4px 9px color-mix(in srgb, var(--app) 28%, transparent));
 }
 .family-app img.round { border-radius: 22.5%; transform: scale(.84); }  /* iOS-only icons come square and full-bleed */
+.family-app img.disc { clip-path: circle(44.5%); transform: scale(1.12); }  /* a disc icon on a pale square ground: show the disc only */
 .family-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .family-name { font-weight: 650; font-size: 16px; line-height: 1.3; color: var(--ink, var(--text, inherit)); }
 .family-tag { font-size: 14px; line-height: 1.4; color: var(--muted); }
