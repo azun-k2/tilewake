@@ -1,0 +1,85 @@
+/* Playful landing look for the family's apps meant for children (opt-in: "playful": true in family.json). Chunky rounded
+   type, one warm gradient, floating stickers, tilted device frames, pastel tiles. Reads --bg --card --ink --muted --accent
+   --line from the site's style.css, so light and dark follow it. */
+:root { --p1: #ff8a3d; --p2: #f0407f; --p3: #8a52ff; --pg: linear-gradient(120deg, var(--p1), var(--p2) 52%, var(--p3)); }
+html { overflow-x: clip; }
+body {
+  padding: 0 0 56px; overflow-x: clip;
+  font-family: ui-rounded, "SF Pro Rounded", "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background:
+    radial-gradient(620px 440px at 6% 0, color-mix(in srgb, var(--p1) 22%, transparent), transparent 70%),
+    radial-gradient(660px 480px at 96% 6%, color-mix(in srgb, var(--p3) 18%, transparent), transparent 70%),
+    radial-gradient(540px 420px at 50% 34%, color-mix(in srgb, var(--p2) 10%, transparent), transparent 70%),
+    var(--bg);
+  background-repeat: no-repeat;
+}
+main { max-width: 1040px; padding: 0 20px; }
+
+.hero { position: relative; text-align: center; padding: 54px 0 0; margin-bottom: 0; }
+.hero .icon {
+  width: 116px; height: 116px; margin: 0 auto 18px; border-radius: 27%; filter: none;
+  box-shadow: 0 18px 38px color-mix(in srgb, var(--p2) 32%, transparent), 0 3px 8px rgba(0, 0, 0, .12);
+  animation: bob 3.6s ease-in-out infinite;
+}
+.hero h1 {
+  display: inline-block; font-size: clamp(50px, 9vw, 84px); line-height: 1.02; margin: 0 0 10px; font-weight: 850; letter-spacing: -2px;
+  background: var(--pg); -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0 .06em .08em;
+}
+.hero .tagline { font-size: clamp(20px, 3vw, 28px); font-weight: 650; line-height: 1.3; max-width: 22em; margin: 0 auto; color: var(--ink); }
+.hero .family-stores { margin: 28px 0 8px; gap: 14px; }
+.hero nav.links { margin-top: 20px; }
+nav.links a { font-weight: 650; font-size: 15px; padding: 9px 17px; border: 2px solid var(--line); transition: transform .15s ease, border-color .15s ease; }
+nav.links a:hover { transform: translateY(-2px) rotate(-1.5deg); border-color: var(--p2); }
+@keyframes bob { 50% { transform: translateY(-7px) rotate(-2deg); } }
+@keyframes float { 50% { transform: translateY(-12px) rotate(8deg); } }
+
+/* Device frames: one big, two tilted behind it, with stickers floating around. */
+.gallery { position: relative; display: flex; justify-content: center; align-items: center; margin: 54px auto 70px; max-width: 1000px; }
+.dev { background: #231a3a; border-radius: 28px; padding: 11px; box-shadow: 0 34px 64px rgba(70, 30, 130, .32), 0 4px 12px rgba(0, 0, 0, .12); flex: none; }
+.dev img { display: block; width: 100%; height: auto; border-radius: 19px; }
+.dev.c { width: min(62%, 640px); position: relative; z-index: 2; }
+.dev.l { width: min(40%, 410px); margin-right: -13%; transform: rotate(-7deg) translateY(26px); }
+.dev.r { width: min(40%, 410px); margin-left: -13%; transform: rotate(7deg) translateY(26px); }
+.gallery::before, .gallery::after { position: absolute; font-size: 46px; z-index: 3; animation: float 4.2s ease-in-out infinite; pointer-events: none; }
+.gallery::before { content: var(--s1, "⭐"); left: 2%; top: -26px; }
+.gallery::after { content: var(--s2, "✏️"); right: 3%; bottom: -22px; animation-delay: -1.8s; }
+.pair { display: flex; gap: 22px; justify-content: center; margin: 8px auto 56px; max-width: 980px; }
+.pair .dev { width: 50%; }
+.pair .dev:first-child { transform: rotate(-2.5deg); }
+.pair .dev:last-child { transform: rotate(2.5deg) translateY(14px); }
+
+.card { border-radius: 30px; border: none; padding: 34px clamp(20px, 4vw, 44px); margin: 0 auto 26px; max-width: 900px; box-shadow: 0 10px 34px rgba(120, 50, 100, .09); }
+.card h2 { font-size: 30px; font-weight: 800; letter-spacing: -.5px; margin: 0 0 14px; }
+.card p { max-width: 46em; }
+body:has(.gallery) .card ul:has(> li > strong:first-child) {
+  list-style: none; padding: 0; margin: 24px 0 8px; counter-reset: tile;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px;
+}
+body:has(.gallery) .card ul:has(> li > strong:first-child) > li {
+  --t: var(--p1); counter-increment: tile; position: relative; margin: 0; padding: 70px 22px 20px; border-radius: 26px; line-height: 1.5;
+  background: color-mix(in srgb, var(--t) 13%, var(--card)); border: 2px solid color-mix(in srgb, var(--t) 34%, transparent);
+  transition: transform .18s ease;
+}
+body:has(.gallery) .card ul > li:hover { transform: translateY(-4px) rotate(-1deg); }
+body:has(.gallery) .card ul > li::before {
+  position: absolute; top: 16px; left: 20px; width: 44px; height: 44px; border-radius: 15px; display: grid; place-items: center; font-size: 25px;
+  background: color-mix(in srgb, var(--t) 24%, var(--card));
+}
+body:has(.gallery) .card ul:has(> li > strong:first-child) > li:nth-child(1) { --t: var(--p1); } body:has(.gallery) .card ul:has(> li > strong:first-child) > li:nth-child(1)::before { content: var(--e1, "✏️"); }
+body:has(.gallery) .card ul:has(> li > strong:first-child) > li:nth-child(2) { --t: var(--p2); } body:has(.gallery) .card ul:has(> li > strong:first-child) > li:nth-child(2)::before { content: var(--e2, "🖍️"); }
+body:has(.gallery) .card ul:has(> li > strong:first-child) > li:nth-child(3) { --t: var(--p3); } body:has(.gallery) .card ul:has(> li > strong:first-child) > li:nth-child(3)::before { content: var(--e3, "🎨"); }
+body:has(.gallery) .card ul:has(> li > strong:first-child) > li:nth-child(4) { --t: #10b5a6; } body:has(.gallery) .card ul:has(> li > strong:first-child) > li:nth-child(4)::before { content: var(--e4, "🧸"); }
+body:has(.gallery) .card ul:has(> li > strong:first-child) > li:nth-child(5) { --t: #f5b81f; } body:has(.gallery) .card ul:has(> li > strong:first-child) > li:nth-child(5)::before { content: var(--e5, "🖼️"); }
+body:has(.gallery) .card ul:has(> li > strong:first-child) > li:nth-child(6) { --t: #3b82f6; } body:has(.gallery) .card ul:has(> li > strong:first-child) > li:nth-child(6)::before { content: var(--e6, "⭐"); }
+body:has(.gallery) .card ul > li > strong:first-child { color: color-mix(in srgb, var(--t) 70%, var(--ink)); font-weight: 800; }
+
+.family { max-width: 1000px; }
+@media (max-width: 700px) {
+  .hero { padding-top: 38px; }
+  .dev.l, .dev.r { display: none; }
+  .dev.c { width: 100%; }
+  .pair { flex-direction: column; align-items: center; }
+  .pair .dev { width: 92%; }
+  .gallery::before { left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .hero .icon, .gallery::before, .gallery::after { animation: none; } }
