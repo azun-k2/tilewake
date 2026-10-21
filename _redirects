@@ -1,0 +1,3 @@
+# English default (root is English): /en redirects to root
+/en / 302
+/en/ / 302
