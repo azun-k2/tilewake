@@ -1,51 +1,275 @@
-/* Modern landing look, opt-in per site ("modern": true in family.json). Calm and grown-up on purpose: tight type, one
-   restrained wash of the app's own --accent, a real product shot, tiles for the feature list. Reads --bg --card --ink
-   --muted --accent --line from the site's style.css, so light and dark follow the site. */
-html { overflow-x: clip; }
-body { padding: 0 0 56px; overflow-x: clip; }
-main { max-width: 1000px; padding: 0 20px; }
+/* Modern landing look, opt-in per site ("modern": true in family.json).
+   Calm, elevated Apple-grade aesthetic: tight typography, multi-point ambient glow
+   of the app's own --accent, crisp product screenshots, responsive feature tiles,
+   and universal support for comparison tables and interactive demos.
+   Reads --bg, --card, --ink, --muted, --accent, --line from the site's style.css. */
 
+html {
+  overflow-x: clip;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  padding: 0 0 64px;
+  overflow-x: clip;
+  line-height: 1.6;
+}
+main {
+  max-width: 1040px;
+  padding: 0 24px;
+  margin: 0 auto;
+}
+
+/* HERO SECTION */
 .hero {
-  position: relative; display: block; text-align: center; margin: 0 calc(50% - 50vw) 0; padding: 64px 20px 44px;
+  position: relative;
+  display: block;
+  text-align: center;
+  margin: 0 calc(50% - 50vw) 0;
+  padding: 68px 24px 48px;
   background:
-    radial-gradient(780px 380px at 82% -8%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 70%),
-    radial-gradient(640px 340px at 8% 6%, color-mix(in srgb, var(--accent) 11%, transparent), transparent 70%);
+    radial-gradient(860px 420px at 50% -8%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 75%),
+    radial-gradient(640px 340px at 12% 8%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%),
+    radial-gradient(640px 340px at 88% 8%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%);
 }
+.hero > div {
+  text-align: center;
+}
+
 .hero .icon {
-  width: 96px; height: 96px; margin: 0 auto 22px; border-radius: 22.5%; filter: none;
-  box-shadow: 0 14px 34px color-mix(in srgb, var(--accent) 30%, transparent), 0 2px 6px rgba(0, 0, 0, .12);
+  width: 104px;
+  height: 104px;
+  margin: 0 auto 24px;
+  border-radius: 22.5%;
+  filter: none;
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--accent) 32%, transparent), 0 2px 8px rgba(0, 0, 0, .14);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
 }
-.hero h1 { font-size: clamp(40px, 6.4vw, 62px); line-height: 1.04; margin: 0 0 14px; letter-spacing: -1.4px; font-weight: 750; }
-.hero:has(+ .shot) { padding-bottom: 150px; }
-.hero > div { text-align: center; }
-.hero .family-stores.start, .hero nav.links { justify-content: center; }
-.hero .tagline, .hero .sub { font-size: clamp(18px, 2.3vw, 22px); line-height: 1.4; max-width: 30em; margin: 0 auto; color: var(--muted); }
-.hero .family-stores, .hero .family-stores.start { margin: 30px 0 8px; gap: 14px; }
-.hero nav.links { margin-top: 22px; }
-nav.links a { padding: 9px 16px; font-size: 15px; }
+.hero .icon:hover {
+  transform: scale(1.03) translateY(-2px);
+  box-shadow: 0 22px 50px color-mix(in srgb, var(--accent) 40%, transparent), 0 4px 12px rgba(0, 0, 0, .18);
+}
 
-.shot { margin: -118px auto 52px; max-width: 880px; position: relative; }
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 8%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--accent);
+  margin-bottom: 22px;
+  box-shadow: 0 2px 12px color-mix(in srgb, var(--accent) 10%, transparent);
+  transition: transform 0.2s, border-color 0.2s;
+}
+.hero-pill:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+}
+
+.hero h1 {
+  font-size: clamp(42px, 6.4vw, 66px);
+  line-height: 1.08;
+  margin: 0 0 16px;
+  letter-spacing: -1.5px;
+  font-weight: 800;
+}
+.gradient-text, .hero h1 span.gradient-text {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 65%, var(--ink, #fff)) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero .tagline, .hero .sub {
+  font-size: clamp(18px, 2.3vw, 22px);
+  line-height: 1.45;
+  max-width: 32em;
+  margin: 0 auto;
+  color: var(--muted);
+  font-weight: 450;
+}
+
+.hero .family-stores, .hero .family-stores.start {
+  margin: 32px 0 10px;
+  gap: 14px;
+  justify-content: center;
+}
+.hero .family-stores.start {
+  justify-content: center;
+}
+
+.platform-banner {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 12px auto 0;
+  letter-spacing: 0.2px;
+}
+
+.hero nav.links {
+  margin-top: 26px;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+nav.links a {
+  padding: 8px 18px;
+  font-size: 14.5px;
+  font-weight: 600;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 6%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--line));
+  color: var(--ink);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+nav.links a:hover {
+  background: color-mix(in srgb, var(--accent) 14%, var(--card));
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.hero:has(+ .shot), .hero:has(+ .demo-wrapper) {
+  padding-bottom: 154px;
+}
+
+/* PRODUCT SCREENSHOT */
+.shot {
+  margin: -120px auto 56px;
+  max-width: 900px;
+  position: relative;
+}
 .shot img {
-  display: block; width: 100%; height: auto; border-radius: 20px; border: 1px solid var(--line);
-  box-shadow: 0 30px 70px rgba(10, 12, 24, .28), 0 4px 14px rgba(10, 12, 24, .12);
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 22px;
+  border: 1.5px solid color-mix(in srgb, var(--accent) 22%, var(--line));
+  box-shadow: 0 35px 85px rgba(0, 0, 0, .32), 0 0 35px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
-.card { border-radius: 22px; padding: 32px clamp(20px, 4vw, 40px); margin-bottom: 22px; max-width: 880px; margin-inline: auto; }
-.card h2 { font-size: 26px; letter-spacing: -.4px; margin: 0 0 14px; }
-.card p { max-width: 46em; }
-body:has(.shot) .card ul:has(> li > strong:first-child) {
-  list-style: none; padding: 0; margin: 22px 0 8px;
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;
+/* CARDS & SECTIONS */
+.card {
+  border-radius: 24px;
+  padding: 36px clamp(22px, 4vw, 44px);
+  margin-bottom: 24px;
+  max-width: 900px;
+  margin-inline: auto;
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
+  transition: border-color 0.2s;
 }
-body:has(.shot) .card ul:has(> li > strong:first-child) > li {
-  margin: 0; padding: 18px 20px; border-radius: 16px; line-height: 1.5;
-  background: color-mix(in srgb, var(--accent) 6%, var(--card)); border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--line));
+.card h2 {
+  font-size: 28px;
+  letter-spacing: -.6px;
+  margin: 0 0 16px;
+  font-weight: 800;
 }
-body:has(.shot) .card ul > li > strong:first-child { color: color-mix(in srgb, var(--accent) 80%, var(--ink)); }
+.card p {
+  max-width: 48em;
+  line-height: 1.6;
+}
 
-.family { max-width: 1000px; }
+/* FEATURE TILES */
+body:has(.shot) .card ul:has(> li > strong:first-child),
+.card ul.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 26px 0 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 16px;
+}
+body:has(.shot) .card ul:has(> li > strong:first-child) > li,
+.card ul.feature-list > li {
+  margin: 0;
+  padding: 22px 24px;
+  border-radius: 18px;
+  line-height: 1.55;
+  background: color-mix(in srgb, var(--accent) 5%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--line));
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s, box-shadow 0.2s;
+}
+body:has(.shot) .card ul:has(> li > strong:first-child) > li:hover,
+.card ul.feature-list > li:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+body:has(.shot) .card ul > li > strong:first-child,
+.card ul.feature-list > li > strong:first-child {
+  display: block;
+  font-size: 16.5px;
+  font-weight: 750;
+  color: color-mix(in srgb, var(--accent) 85%, var(--ink));
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+
+/* COMPARISON TABLES */
+.table-scroll {
+  overflow-x: auto;
+  margin: 20px 0 6px;
+  -webkit-overflow-scrolling: touch;
+}
+.comp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  font-size: 14.5px;
+  margin-top: 18px;
+}
+.comp-table th, .comp-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  line-height: 1.5;
+}
+.comp-table tr:last-child td {
+  border-bottom: none;
+}
+.comp-table th {
+  background: color-mix(in srgb, var(--accent) 7%, var(--card));
+  font-size: 14px;
+  font-weight: 750;
+  color: var(--ink);
+}
+.comp-table th.highlight-col, .comp-table td.highlight-col {
+  background: color-mix(in srgb, var(--accent) 14%, var(--card));
+  color: var(--accent);
+  font-weight: 650;
+}
+
+/* RESPONSIVENESS */
+.family {
+  max-width: 1040px;
+}
 @media (max-width: 640px) {
-  .hero { padding: 44px 16px 110px; }
-  .shot { margin: -86px auto 36px; }
-  .shot img { border-radius: 14px; }
+  .hero {
+    padding: 48px 18px 116px;
+  }
+  .hero h1 {
+    font-size: 38px;
+    letter-spacing: -1px;
+  }
+  .shot {
+    margin: -88px auto 40px;
+  }
+  .shot img {
+    border-radius: 16px;
+  }
+  .card {
+    padding: 26px 20px;
+    border-radius: 18px;
+  }
 }
